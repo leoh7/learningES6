@@ -136,25 +136,30 @@ trip[]
 		// trip 추가
 		$('#add_btn').on('click', function(){
 			trip_cnt ++;
-			var append = '';
-			append += ' <input type="hidden" name="trip[]">';
-			append += ' <div class="form-group row">';
-			append += ' 	<label for="trip_member_count">참여인원</label>';
-			append += ' 	<input type="number" class="trip_member_count" name="trip[][member_count]" placeholder="n명">';
-			append += ' </div>';
-			append += ' <div class="form-group row">';
-			append += ' 	<input type="text" class="trip_start_date" name="trip[][start_date]" placeholder="시작일">';
-			append += ' 	~';
-			append += ' 	<input type="text" class="trip_end_date" name="trip[][end_date]" placeholder="종료일">';
-			append += ' </div>';
-			append += ' 	<input type="hidden" name="trip[][coord_id]">';
-			append += ' 		<input type="hidden" class="trip_place_name" name="trip[][coord_id][place_name]">';
-			append += ' 		<input type="hidden" class="trip_country_code" name="trip[][coord_id][country_code]">';
-			append += ' 		<input type="hidden" class="trip_long" name="trip[][coord_id][long]">';
-			append += ' 		<input type="hidden" class="trip_lat" name="trip[][coord_id][lat]">';
-			append += ' 	<input type="hidden" class="trip_order" name="trip[][trip_order]" value="'+trip_cnt+'">';
-			
-			$('.trip_part').append(append);
+//			var append = '';
+//			append +=	'<div class="trip_chips">';
+//			append +=	'	<input type="hidden" name="trip[]">';
+//			append +=	'	<div class="form-group row">';
+//			append +=	'		<label for="trip_member_count">참여인원</label>';
+//			append +=	'		<input type="number" class="trip_member_count" name="trip[][member_count]" placeholder="n명">';
+//			append +=	'	</div>';
+//			append +=	'	<div class="form-group row">';
+//			append +=	'		<input type="text" class="trip_start_date" name="trip[][start_date]" placeholder="시작일">';
+//			append +=	'		~';
+//			append +=	'		<input type="text" class="trip_end_date" name="trip[][end_date]" placeholder="종료일">';
+//			append +=	'	</div>';
+//			append +=	'		<input type="hidden" name="trip[][coord_id]">';
+//			append +=	'			<input type="hidden" class="trip_place_name" name="trip[][coord_id][place_name]">';
+//			append +=	'			<input type="hidden" class="trip_country_code" name="trip[][coord_id][country_code]">';
+//			append +=	'			<input type="hidden" class="trip_long" name="trip[][coord_id][long]">';
+//			append +=	'			<input type="hidden" class="trip_lat" name="trip[][coord_id][lat]">';
+//			append +=	'		<input type="hidden" class="trip_order" name="trip[][trip_order]" value="'+trip_cnt+'">';
+//			append +=	'</div>';
+			$('.trip_chips')
+				.eq($(this).length - 1)
+				.clone()
+				.appendTo('.trip_part');
+//			$('.trip_part').append(append);
 		});
 		// trip 삭제
 		
