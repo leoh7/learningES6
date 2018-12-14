@@ -171,11 +171,14 @@ trip[]
 //				.last()
 //				.val(trip_cnt);
 		});
-		// trip 삭제
-		$(document).on('cilck', '.trip_chips', function(){
-			console.log($(this).val())
-//				.eq($(this).length - 1)
-//				.remove();
+		// del_btn / trip 삭제
+		$('#del_btn').on('click', function(){
+			$('.trip_chips')
+				.last()
+				.remove();
+			
+			trip_cnt -= 1;		// del 에서는 add 에서처럼 trip_order 값 수정
+			console.log(trip_cnt);
 		});
 		// trip_order 변경
 
