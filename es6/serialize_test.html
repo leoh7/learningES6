@@ -25,52 +25,58 @@
 </head>
 <body>
 	<div class="container" style="width: 800px;">
-			<form id="tripForm" class="form" method="post">
+		<form id="tripForm" class="form" method="post"">	<!-- TODO : onsubmit에 writeCheck() 일단 무시함. 새로 제작 필요 -->
+			<div class="input-box">	
 				<div class="input-box">	
-					<div class="board_part">
-						<input type="hidden" name="board[]">
-							<div class="form-group row">
-								<input type="text" class="board_title " name="board[title]" placeholder="제목">
-							</div>
-							<div class="form-group row"><label for="board_content">글내용</label>
-								<textarea class="board_content" name="board[content]" placeholder="내용을 입력하세요">
-								</textarea>
-							</div>
-							<div class="form-group row"><label for="board_contact">대화링크</label>
-								<input type="text" class="board_contact" name="board[contact]">
-							</div>
-							<div class="form-group row">
-								<input type="checkbox" class="board_tag" name="board[tag][]" value="tag1">태그1
-								<input type="checkbox" class="board_tag" name="board[tag][]" value="tag2">태그2
-								<input type="checkbox" class="board_tag" name="board[tag][]" value="tag3">태그3
-							</div>
-					</div>
-					<div class="trip_part">
-						<div class="trip_chips">
-							<input type="hidden" name="trip[]">
-							<div class="form-group row">
-								<label for="trip_member_count">참여인원</label>
-								<input type="number" class="trip_member_count" name="trip[][member_count]" placeholder="n명">
-							</div>
-							<div class="form-group row">
-								<input type="text" class="trip_start_date" name="trip[][start_date]" placeholder="시작일">
-								~
-								<input type="text" class="trip_end_date" name="trip[][end_date]" placeholder="종료일">
-							</div>
-								<input type="hidden" name="trip[][coord_id]">
-									<input type="hidden" class="trip_place_name" name="trip[][coord_id][place_name]">
-									<input type="hidden" class="trip_country_code" name="trip[][coord_id][country_code]">
-									<input type="hidden" class="trip_long" name="trip[][coord_id][long]">
-									<input type="hidden" class="trip_lat" name="trip[][coord_id][lat]">
-								<input type="hidden" class="trip_order" name="trip[][trip_order]" value="1">
+			<div class="input-box">	
+				<div class="board_part">
+					<input type="hidden" name="board[]">
+						<div class="form-group row">
+							<input type="text" class="board_title col-12 form-control form-control-lg" name="board[title]" placeholder="제목" maxlength="30">
 						</div>
+						<div class="form-group row">
+							<label for="board_content" class="col-2 col-form-label">글내용</label>
+							<textarea class="board_content" name="board[content]" placeholder="내용을 입력하세요">
+							</textarea>
+						</div>
+						
+						
+				</div>
+				<div class="trip_part">
+					<div class="trip_chips">
+						<input type="hidden" name="trip[]">
+						<div class="form-group row">
+							<label for="trip_member_count" class="col-2 col-form-label">참여인원</label>
+							<input type="number" class="trip_member_count col-2" name="trip[][member_count]" min="1" placeholder="n명">
+						</div>
+						<div class="form-group row">
+							<input type="text" class="trip_start_date" name="trip[][start_date]" placeholder="시작일">
+							~
+							<input type="text" class="trip_end_date" name="trip[][end_date]" placeholder="종료일">
+						</div>
+							<input type="hidden" name="trip[][coord_id]">
+								<input type="hidden" class="trip_place_name" name="trip[][coord_id][place_name]">
+								<input type="hidden" class="trip_country_code" name="trip[][coord_id][country_code]">
+								<input type="hidden" class="trip_long" name="trip[][coord_id][long]">
+								<input type="hidden" class="trip_lat" name="trip[][coord_id][lat]">
+							<input type="hidden" class="trip_order" name="trip[][trip_order]" value="1">
 					</div>
 				</div>
-				<input type="submit" value="전송">
-			</form>
-			<button id="add_btn">추가</button>
-			<button id="del_btn">삭제</button>
-		</div>
+			</div>
+			<div class="form-group row">
+				<input type="checkbox" class="board_tag" name="board[tag][]" value="tag1">태그1
+				<input type="checkbox" class="board_tag" name="board[tag][]" value="tag2">태그2
+				<input type="checkbox" class="board_tag" name="board[tag][]" value="tag3">태그3
+			</div>
+			<div class="form-group row">
+				<label for="board_contact" class="col-2 col-form-label">대화링크</label>
+				<input type="text" class="board_contact" name="board[contact]">
+			</div>
+			<input type="submit" value="전송">
+		</form>
+		<button id="add_btn">추가</button>
+		<button id="del_btn">삭제</button>
+	</div>
 
 <!-- 다음과 같은 내용이 본문에 중복되어 들어가도 tree형태를 구성하는데 무리가 없다.
 		<input type="hidden" name="trip[]" value="trip2">
@@ -137,8 +143,7 @@ trip[]
 		let trip_cnt = 1;
 		const start_end = '.trip_start_date, .trip_end_date';
 		$(document).on('focus', start_end, function(){
-//			$(document).find(start_end).removeClass('hasDatepicker').datepicker();		허미 씨벌
-			$(this).closest(start_end).datepicker({
+			$(this).datepicker({
 				minDate: 0,
 				changeMonth: true,
 				changeYear: true,
@@ -153,23 +158,22 @@ trip[]
 			var $clone = $last.clone(false);
 			$last.after($clone);
 			$('.trip_chips:last input, .trip_chips:last select').val('');
-			$clone.find('input.datepicker')
+			$clone.find('input.trip_start_date')
 				.removeClass('hasDatepicker')
 				.removeData('datepicker')
 				.attr('id', 'change_id' + Math.random())
 				.unbind()
 				.datepicker();
-
-
-//			$('.trip_chips')
-//				.last()
-//				.clone(false)
-//				.appendTo('.trip_part');
-//
-//			trip_cnt += 1;		// trip_order 값 수정
-//			$('.trip_order')
-//				.last()
-//				.val(trip_cnt);
+			$clone.find('input.trip_end_date')
+				.removeClass('hasDatepicker')
+				.removeData('datepicker')
+				.attr('id', 'change_id' + Math.random())
+				.unbind()
+				.datepicker();
+			trip_cnt += 1;		// trip_order 값 수정
+			$('.trip_order')
+				.last()
+				.val(trip_cnt);
 		});
 		// del_btn / trip 삭제
 		$('#del_btn').on('click', function(){
@@ -178,7 +182,6 @@ trip[]
 				.remove();
 			
 			trip_cnt -= 1;		// del 에서는 add 에서처럼 trip_order 값 수정
-			console.log(trip_cnt);
 		});
 		// 데이터 submit 
 		$('form#tripForm').on('submit', function(){
