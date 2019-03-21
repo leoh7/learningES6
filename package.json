@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/leoh7/study-es6/issues"
   },
-  "homepage": "https://github.com/leoh7/study-es6#readme"
+  "homepage": "https://github.com/leoh7/study-es6#readme",
+  "devDependencies": {
+    "gulp": "^4.0.0"
+  }
 }
