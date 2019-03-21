@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/leoh7/study-es6#readme",
   "devDependencies": {
+    "babel-preset-es2015": "^6.24.1",
     "gulp": "^4.0.0"
   }
 }
