@@ -32,7 +32,7 @@ rj3.svg.line = function() {
 
 		while (++i < n) {
 			d = data[i];
-			points.push([+getX.call(this, d, i), +getY.call(this, d, i)]);
+			points.push([+getX.call(this, d, i), +getY.call(this, d, i)]);	// +는 숫자처럼 생긴 문자열을 걸러내고 진짜 숫자만 points 배열에 넣기 위한 요령이다
 		}
 		if(points.length) {
 			segment();
